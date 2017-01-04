@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WiFiPicker</string>
+    <string name="title_activity_maps">WiFiPicker</string>
+    <string name="new_map">Nowa mapa</string>
+    <string name="start_scan">Skanuj</string>
+    <string name="stop_scan">Zatrzymaj skanowanie</string>
+    <string name="settings">Ustawienia</string>
+</resources>
