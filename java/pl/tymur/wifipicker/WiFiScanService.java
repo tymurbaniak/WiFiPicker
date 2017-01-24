@@ -64,8 +64,6 @@ public class WiFiScanService extends Service {
         IntentFilter wifiAndLocation = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         wifiAndLocation.addAction("Position");
         registerReceiver(mWifiReceiver, wifiAndLocation);
-        wifi.startScan();
-
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -81,12 +79,13 @@ public class WiFiScanService extends Service {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            mWifiList = wifi.getScanResults();
-            Log.i("***WifiReceiver", "Zeskanowano sieć: " + mWifiList.get(0).SSID);
-            Log.i("wifiscanlist", wifi.getScanResults().get(0).SSID);
             Log.i("WiFiScanReceiver", "Working");
-
             if(intent.hasExtra("Latitude") && intent.hasExtra("Longitude")){
+                wifi.startScan();
+                mWifiList = wifi.getScanResults();
+                Log.i("***WifiReceiver", "Zeskanowano sieć: " + mWifiList.get(0).SSID);
+                Log.i("wifiscanlist", wifi.getScanResults().get(0).SSID);
+
                 for(int i = 0; i < mWifiList.size(); i++){
                     ScanResult networkData = mWifiList.get(i);
                     mdb.insertWifiNetworks(networkData.BSSID,
